@@ -29,12 +29,12 @@ export default {
               555:'#99a3b3',
             },
 
-                aside: '#1F4583',
-                primary: '#008540',
-                thirdy: '#f7b03e',
-                secondary: '#4e46e5',
-                textColor: '#4B5563',
-                greenHover: '#097a34',
+                aside: '#1E293B',
+                primary: '#1738b0',
+                thirdy: '#FF7B00',
+                secondary: '#00C2FF',
+                mainText: '#0F172A',
+                secondText: '#64748B',
                 lightgray: '#EFEFEF',
                 hoverBlue: '#A5C8D8',
 

@@ -11,6 +11,7 @@ const Login = () => import("@/components/public/Login.vue");
 const Homepage = () => import("@/components/public/Homepage.vue");
 
 const Dashboard = () => import("@/components/private/Dashboard/index.vue");
+const Users = () => import("@/components/private/Users/Index.vue");
 
 const RolesAndPermissions = () => import("@/components/private/RolesPermissions/Index.vue");
 
@@ -59,7 +60,7 @@ const routes = [
                 path: "/app/dashboard",
                 component: Dashboard,
                 meta: {
-                    title: `Dashboard`,
+                    title: `TechKa | Dashboard`,
                     ability: "dashboard",
                 },
             },
@@ -68,8 +69,17 @@ const routes = [
                 path: "/app/roles-and-permissions",
                 component: RolesAndPermissions,
                 meta: {
-                    title: `Roles & Permissions`,
+                    title: `TechKa | Roles & Permissions`,
                     ability: "roles-and-permissions",
+                },
+            },
+            {
+                name: "users",
+                path: "/app/manage-users",
+                component: Users,
+                meta: {
+                    title: `TechKa | Users`,
+                    ability: "manage-users",
                 },
             },
             // {

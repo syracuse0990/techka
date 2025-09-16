@@ -44,11 +44,11 @@
                                         </div>
                                         <div class="px-1 flex flex-col gap-2">
                                             <button
-                                                class="p-1.5 px-3 h-[33px] bg-bluer dark:bg-darkmode-600 dark:text-darkmode-444 tracking-wider text-[11px] text-white w-full rounded-md"
+                                                class="p-1.5 px-3 h-[33px] bg-primary dark:bg-darkmode-600 dark:text-darkmode-444 tracking-wider text-[11px] text-white w-full rounded-md"
                                                 @click="filterDate">Filter
                                             </button>
                                             <button v-if="hasExport"
-                                                :class="['p-1.5 px-3 h-[33px] dark:bg-darkmode-600 dark:text-darkmode-444 tracking-wider text-[11px] text-white w-full rounded-md', start_date != '' && to_date != '' ? 'bg-bluer' : 'bg-emsGray cursor-not-allowed']"
+                                                :class="['p-1.5 px-3 h-[33px] dark:bg-darkmode-600 dark:text-darkmode-444 tracking-wider text-[11px] text-white w-full rounded-md', start_date != '' && to_date != '' ? 'bg-primary' : 'bg-emsGray cursor-not-allowed']"
                                                 @click="isExporting || (start_date == '' || to_date == '') ? null : $emit('export', { start_date: start_date, to_date: to_date })">
                                                 <div v-if="isExporting"
                                                     :class="['flex items-center justify-center gap-2', { 'hover:cursor-not-allowed': isExporting }]">
@@ -113,7 +113,7 @@
                     <div class="border-b dark:border-gray-600 rounded-t-lg overflow-hidden">
                         <div class="w-full max-h-[700px] overflow-auto  min-h-[475px]">
                             <table class="w-full table-fixed overflow-auto bg-white ">
-                                <thead class="bg-bluer dark:bg-darkmode-600 text-white  sticky top-0 z-10">
+                                <thead class="bg-primary dark:bg-darkmode-600 text-white  sticky top-0 z-10">
                                     <tr>
                                         <th v-show="showSelect" scope="col" class="py-2.5 pl-2 text-sm w-10">
                                             <input type="checkbox" class="parentCheckbox focus:ring-0 rounded-sm dark:bg-darkmode-700 dark:border-gray-500"
@@ -122,7 +122,7 @@
                                         <th v-for="(th, index) in filteredHeader" :key="th"
                                             v-show="th.title != 'APPROVERS' && !th.hide"
 
-                                            :class="[th.freeze ? 'dark:bg-darkmode-600 bg-bluer ':'' ,'py-2.5  text-sm dark:text-darkmode-555  font-normal ',isAttendanceReport ? '' : 'whitespace-nowrap uppercase', th.title == 'ACTIONS' || th.title == 'ID' ? 'w-32' : (th.title == 'ATTACHMENTS' ? 'w-64' : 'w-44 min-w-44')]"
+                                            :class="[th.freeze ? 'dark:bg-darkmode-600 bg-primary ':'' ,'py-2.5  text-sm dark:text-darkmode-555  font-normal ',isAttendanceReport ? '' : 'whitespace-nowrap uppercase', th.title == 'ACTIONS' || th.title == 'ID' ? 'w-32' : (th.title == 'ATTACHMENTS' ? 'w-64' : 'w-44 min-w-44')]"
                                             :style="th.freeze ? { left: getLeftPosition(index) + 'px', position: 'sticky', zIndex: 10,  } : {}" :ref="'header-' + index">
                                             <div
                                                 :class="['flex items-center px-2 gap-2', { 'justify-center': th.title == 'ACTIONS' }, { 'ml-5': index == 0 }]">

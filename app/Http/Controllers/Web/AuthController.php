@@ -37,7 +37,7 @@ class AuthController extends BaseController
         return $this->sendResponse(
             [
                 'user' => $user,
-                'permissions' => $user->role_data ? $user->role_data->permissions->data_array : [],
+                'permissions' => $user->role_data && $user->role_data->permissions ? $user->role_data->permissions->data_array : [],
             ],
             'Login Successful.'
         );

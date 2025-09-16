@@ -14,7 +14,7 @@
                 <input type="search" :id="name" v-model="searchText" :placeholder="placeholder" autofocus @input="onInputChange($event.target.value)"
                     class="block w-full px-4 py-2 pl-10 text-sm text-darkgray border border-gray-300 rounded-lg bg-gray-50  dark:bg-darkmode-800 dark:border-slate-700 dark:placeholder-gray-400 dark:text-white ">
                 <button type="submit"
-                    class="text-white bg-[#2465C7] absolute right-[3px] bottom-[3px] bg-[#2465C7 ] hover:bg-blue-800  font-medium rounded-r-md text-sm px-4 py-1.5 dark:bg-darkmode-600 dark:hover:bg-darkmode-500">
+                    class="text-white bg-primary absolute right-[3px] bottom-[3px]  hover:bg-blue-800  font-medium rounded-r-md text-sm px-4 py-1.5 dark:bg-darkmode-600 dark:hover:bg-darkmode-500">
                     {{ label }}
                 </button>
             </div>

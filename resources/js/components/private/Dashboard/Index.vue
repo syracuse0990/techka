@@ -71,12 +71,7 @@ const activeButton = ref(0);
 // List of button labels
 const buttons = [
   'Overview',
-  'Geospatial AI Solutions',
-  'Techno-Demo',
-  'JAS',
-  'GHG',
-  'Activities',
-  'Agri Data PH'
+//   '',
 ];
 
 const startDate = ref(new Date(new Date().getFullYear(), 0, 1));

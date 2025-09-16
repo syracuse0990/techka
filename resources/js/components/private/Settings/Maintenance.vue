@@ -5,7 +5,8 @@
     <TabsComponent @click="switchTab" :tabData="tabData">
         <template #misc>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-10 p-5">
-                <DeveloperPanel v-if="mountDeveloper"></DeveloperPanel>
+                <CategoryPanel v-if="mountCategory"></CategoryPanel>
+                <CategoryPanel v-if="mountCategory"></CategoryPanel>
             </div>
         </template>
         <!-- <template #item-types>
@@ -20,24 +21,24 @@
 import { onMounted, reactive, ref, watch, computed, provide, inject, onUpdated, nextTick   } from "vue";
 import { UserIcon, BuildingOffice2Icon, UsersIcon, BuildingOfficeIcon, ListBulletIcon, Cog8ToothIcon, ClipboardDocumentIcon, NewspaperIcon } from '@heroicons/vue/24/outline'
 import TabsComponent from '@/components/parts/Tab/TabIcon.vue';
-import FertilizerPanel from '@/components/private/Settings/parts/FertilizerPanel.vue';
+import CategoryPanel from '@/components/private/Settings/parts/Category.vue';
 //import ItemType from '@/components/private/settings/components/ItemType.vue';
 
 const tabData = ref([
      { name: 'misc', label: 'Miscellaneous', icon: BuildingOffice2Icon, disabled: false, show: true },
-     { name: 'item-types', label: 'Item Types', icon: ClipboardDocumentIcon, disabled: false, show: true },
+     { name: 'item-types', label: 'Others', icon: ClipboardDocumentIcon, disabled: false, show: true },
 ])
-const mountFetilizer = ref(false)
+const mountCategory = ref(false)
 
 
 function switchTab(index) {
     // Reset all panels
-    mountFetilizer.value = false;
+    mountCategory.value = false;
 
 
     // Enable relevant panels
     if (index === 0) {
-        mountFetilizer.value = true
+        mountCategory.value = true
     }
     // else if (index === 1) {
     //     mountItemTypes.value = true;
@@ -51,7 +52,7 @@ function switchTab(index) {
 }
 
 onMounted(() => {
-
+      mountCategory.value = true
 })
 
 </script>

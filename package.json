@@ -30,6 +30,8 @@
         "pinia": "^3.0.1",
         "pinia-plugin-persistedstate": "^4.2.0",
         "vform": "^2.1.2",
-        "vue-router": "^4.5.0"
+        "vue-router": "^4.5.0",
+        "vue-select": "^4.0.0-beta.6",
+        "xlsx": "^0.18.5"
     }
 }

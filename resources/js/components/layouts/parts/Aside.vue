@@ -1,15 +1,15 @@
 <template>
     <div>
-        <aside class = "w-60 -translate-x-48 fixed transition transform ease-in-out duration-1000 z-50 flex h-screen bg-primary dark:bg-darkmode-700 border-r border-blue-300 shadow-md">
+        <aside class = "w-60 -translate-x-48 fixed transition transform ease-in-out duration-1000 z-50 flex h-screen bg-aside dark:bg-darkmode-700 border-r border-blue-300 shadow-md">
             <div class = "max-toolbar translate-x-24 scale-x-0 w-full justify-center transition bg-white transform ease-in duration-300 flex items-center dark:border-[#38BDF8] dark:bg-darkmode-700 absolute  h-16 pr-4">
                 <div  class = "flex items-center justify-center  text-white ">
                     <div class= "transform ease-in-out duration-300">
                         <!-- <img class="h-12" src="/images/logo.png" alt=""> -->
-                         <span class="text-primary font-bold text-2xl text-shadow-gold">Digisaka</span>
+                         <span class="text-aside font-bold text-2xl text-shadowed">Tech<span class="text-primary">Ka</span></span>
                     </div>
                 </div>
             </div>
-            <div @click.prevent="openNav()" class = "-right-[22px] transition transform ease-in-out duration-500 flex bg-white border-2 border-primary dark:border-[#38BDF8] bg-lightblue dark:bg-darkmode-700 dark:hover:bg-blue-100 hover:bg-green-100 absolute top-2.5 p-1 rounded-full text-white">
+            <div @click.prevent="openNav()" class = "-right-[22px] transition transform ease-in-out duration-500 flex bg-white border-2 border-primary  dark:border-[#38BDF8] bg-lightblue dark:bg-darkmode-700 dark:hover:bg-blue-100 hover:bg-green-100 absolute top-2.5 p-1 rounded-full text-white">
                 <img class="rounded-full h-8 w-8 transition transform ease-in-out duration-500 hover:scale-x-[-1]" :src="logo" alt="">
             </div>
 
@@ -17,19 +17,19 @@
             <div class= "max hidden text-white mt-20 flex-col space-y-2 w-full h-[calc(100vh)]">
                 <ul role="list" class="space-y-1 px-2">
                     <li v-for="item in navigation" :key="item.key" >
-                        <router-link v-if="!item.children" :to="item.href" :class="[$route.path.includes(item.href) ? 'bg-bluer text-darkmode-600 dark:bg-darkmode-500' : 'hover:bg-bluer dark:hover:bg-darkmode-500 hover:text-white', 'group text-white hover:text-darkmode-600 hover:cursor-pointer flex gap-x-3 rounded-md p-2 text-sm leading-6 font-normal dark:text-darkmode-555']">
+                        <router-link v-if="!item.children" :to="item.href" :class="[$route.path.includes(item.href) ? 'bg-primary text-darkmode-600 dark:bg-darkmode-500' : 'hover:bg-primary dark:hover:bg-darkmode-500 hover:text-white', 'group text-white hover:text-darkmode-600 hover:cursor-pointer flex gap-x-3 rounded-md p-2 text-sm leading-6 font-normal dark:text-darkmode-555']">
                             <component :is="item.icon" class="h-6  hover:text-darkmode-600 w-6 shrink-0 dark:text-darkmode-555" aria-hidden="true" />
                             {{ item.name }}
                         </router-link>
                         <Disclosure as="div" v-else v-slot="{ open }">
-                            <DisclosureButton @click.prevent="gotoPage()" :class="[item.current ? ' bg-white' : ' hover:bg-bluer dark:hover:bg-darkmode-500'] + ' has-child flex items-center hover:text-white w-full text-left text-white font-normal rounded-md hover:cursor-pointer p-2 gap-x-3 text-sm leading-6  dark:text-darkmode-555 ' + item.key ">
+                            <DisclosureButton @click.prevent="gotoPage()" :class="[item.current ? ' bg-white' : ' hover:bg-primary dark:hover:bg-darkmode-500'] + ' has-child flex items-center hover:text-white w-full text-left text-white font-normal rounded-md hover:cursor-pointer p-2 gap-x-3 text-sm leading-6  dark:text-darkmode-555 ' + item.key ">
                                 <component :is="item.icon" class="h-6 w-6 shrink-0 hover:text-darkmode-600  dark:text-darkmode-555" aria-hidden="true" />
                                 {{ item.name }}
                                 <ChevronRightIcon :class="[open ? 'rotate-90 text-white ' : 'text-white ', 'rotate-180 transition hover:text-darkmode-600 duration-300 ml-auto h-5 w-5 shrink-0 dark:text-darkmode-555']" aria-hidden="true" />
                             </DisclosureButton>
                             <DisclosurePanel as="ul" class="px-2 dark:bg-darkmode-700 dark:py-1">
                                 <li v-for="subItem in item.children" :key="subItem.name" class="py-0.5">
-                                    <router-link :to="subItem.href" :class="[$route.path.includes(subItem.href)? 'bg-bluer text-aside' : 'hover:bg-bluer dark:hover:bg-darkmode-500', 'block text-white font-normal rounded-md py-2 pr-2 pl-9 text-sm leading-6 dark:text-darkmode-555 ']">
+                                    <router-link :to="subItem.href" :class="[$route.path.includes(subItem.href)? 'bg-primary text-aside' : 'hover:bg-primary dark:hover:bg-darkmode-500', 'block text-white font-normal rounded-md py-2 pr-2 pl-9 text-sm leading-6 dark:text-darkmode-555 ']">
                                         {{ subItem.name }}
                                     </router-link>
                                 </li>
@@ -82,29 +82,29 @@ export default{
             isSidebarOpen: siteSettings().getAside,
             user: userAuthStore().getUser,
             role_permissions: userAuthStore().getUser.role_permissions,
-            logo: '/images/logo.png',
+            logo: '/images/techka.png',
             // permissions: userAuthStore().getPermissions,
             isMenuName:'',
             navigation:[
                 { name: 'Dashboard', key:'dashboard', href: '/app/dashboard', icon: HomeIcon, current: this.$route.fullPath == 'dashboard' },
                 { name: 'Roles and Permissions', key:'roles-and-permissions', href: '/app/roles-and-permissions', icon: UserGroupIcon, current: this.$route.fullPath == '/app/roles-and-permissions' },
-                { name: 'Farmers', key:'manage-farmers', href: '/app/manage-users', icon: UsersIcon, current: this.$route.fullPath == '/app/manage-users' },
                 { name: 'Users', key:'manage-users', href: '/app/manage-users', icon: UserGroupIcon, current: this.$route.fullPath == '/app/manage-users' },
-                { name: 'Farms', key:'manage-farms', href: '/app/manage-employees', icon: IdentificationIcon, current: false },
-                { name: 'Survey', key:'manage-survey', href: '/app/manage-employees', icon: IdentificationIcon, current: false },
-                {
-                    name: 'Site Settings',
-                    key:'settings',
-                    icon: Cog6ToothIcon,
-                    current: false,
-                    children: [
+                { name: 'Job Posts', key:'manage-posts', href: '/app/manage-posts', icon: DocumentTextIcon, current: this.$route.fullPath == '/app/manage-posts' },
+                { name: 'Trainings', key:'manage-trainings', href: '/app/manage-trainings', icon: IdentificationIcon, current: this.$route.fullPath == '/app/manage-trainings' },
+                // { name: 'Survey', key:'manage-survey', href: '/app/manage-employees', icon: IdentificationIcon, current: false },
+                // {
+                //     name: 'Site Settings',
+                //     key:'settings',
+                //     icon: Cog6ToothIcon,
+                //     current: false,
+                //     children: [
 
-                    { name: 'Maintenance', href: '/app/settings/maintenance', },
+                //     { name: 'Maintenance', href: '/app/settings/maintenance', },
 
-                    ],
-                },
-                { name: 'Webinars', key:'reports', href: '#', icon: ChatBubbleBottomCenterTextIcon, current: false },
-                { name: 'Sales Team', key:'sales', href: '#', icon: ChatBubbleBottomCenterTextIcon, current: false },
+                //     ],
+                // },
+                { name: 'Maintenance', key:'maintenance', href: '/app/settings/maintenance', icon: Cog6ToothIcon, current: false },
+                // { name: 'Sales Team', key:'sales', href: '#', icon: ChatBubbleBottomCenterTextIcon, current: false },
                 // { name: 'Components', key:'components', href: '/app/components', icon: CubeTransparentIcon, current: this.$route.fullPath == '/app/components' },
             ],
             permittedNavigation: [],

@@ -2,7 +2,7 @@
     <div>
         <div class = "fixed w-full z-30 flex bg-white  dark:bg-darkmode-800 p-2 items-center shadow-sm justify-center h-16 px-10 dark:border-gray-800">
             <div class = "logo ml-12 dark:text-white  transform ease-in-out duration-500 flex-none h-full flex items-center justify-center">
-                <img class="h-14" :src="[bgTheme == 'light' ? '/images/proptech-logo.png' : '/images/proptech-logo.png']" alt="">
+                <img class="h-14" :src="[bgTheme == 'light' ? '/images/techka.png' : '/images/techka.png']" alt="">
 
             </div>
 
