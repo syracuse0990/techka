@@ -21,6 +21,7 @@ app.use(pinia);
 app.use(Router);
 app.use(moshaToast);
 // app.use(Shimmer);
+app.component("v-select", vSelect);
 app.component('VueDatePicker', VueDatePicker);
 // app.component("downloadExcel", JsonExcel);
 app.config.globalProperties.$moment = moment;

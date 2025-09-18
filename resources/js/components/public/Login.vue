@@ -50,17 +50,19 @@
           </div>
 
 
-          <div class="flex items-center justify-between">
+          <div class="flex items-center justify-between" data-aos="fade-in" data-aos-duration="1000" v-if="isRegister">
             <label class="flex items-center space-x-2">
-              <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 text-indigo-600 border-gray-300 rounded" />
+              <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 text-primary border-gray-300 rounded" />
               <span class="text-sm text-gray-600">Remember me</span>
             </label>
             <a href="#" class="text-sm text-indigo-600 hover:underline" >Forgot password?</a >
           </div>
 
-          <div>
-            <SolidButton :isLoading="form.busy" label="Login" :icon="LockClosedIcon" class="w-full" />
+
+          <div class="mb-5">
+            <SolidButton :isLoading="form.busy" :label="isRegister ? 'Login' : ' Register'" :icon="isRegister ? LockClosedIcon: UserPlusIcon" class="w-full" />
           </div>
+
         </form>
 
         <div class="mt-10">
@@ -74,6 +76,9 @@
             <a href="#" class="flex-1 text-center py-2 border rounded text-sm text-gray-700 hover:bg-indigo-50" >Terms & Conditions</a >
           </div>
         </div>
+         <div class="flex items-center justify-end pt-5">
+            <a href="#" @click="isRegister = !isRegister" class="text-sm text-primary hover:underline" > {{ isRegister ? "Don't have an account? Register here." : "Already have an account? Login here." }} </a >
+          </div>
       </div>
     </div>
   </div>
@@ -87,7 +92,7 @@
   import {userAuthStore} from '@/store/auth';
   import { successMessage, errorMessage } from "@/utilities/toast.js";
   import SolidButton from '@/components/parts/Buttons/SolidButton.vue';
-  import { LockClosedIcon, XMarkIcon } from '@heroicons/vue/24/outline';
+  import { LockClosedIcon, XMarkIcon, UserPlusIcon } from '@heroicons/vue/24/outline';
 
   const logo = ref('/images/techka.png')
   const sidebanner = ref('/images/intro.webp')
@@ -100,6 +105,7 @@
     const processing = ref(false)
     const url = ref('')
     const displayPreview = ref(true)
+    const isRegister = ref(true)
 
     function preview(newURL){
         displayPreview.value = !displayPreview.value

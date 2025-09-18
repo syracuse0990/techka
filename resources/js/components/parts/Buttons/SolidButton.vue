@@ -2,7 +2,7 @@
     <button
       :type="type"
       :disabled="isLoading || disabled"
-      :class=" [disabled ? 'bg-slate-500 hover:bg-slate-400 border-gray-700 text-white cursor-not-allowed' : customClass == '' ? 'bg-secondary text-white hover:bg-blue-600' : customClass]"
+      :class=" [disabled ? 'bg-slate-500 hover:bg-slate-400 border-gray-700 text-white cursor-not-allowed' : customClass == '' ? 'bg-secondary text-white hover:bg-primary' : customClass]"
       class="flex w-full justify-center items-center rounded-md  px-3 py-1.5 border  border-gold text-sm font-semibold leading-6 shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
       v-bind="$attrs"
     >

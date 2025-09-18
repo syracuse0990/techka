@@ -13,10 +13,18 @@
       <a href="#" class="hover:text-indigo-600">Contact</a>
     </nav>
 
-    <!-- Desktop Login -->
-    <router-link :to="'/login'" class="hidden md:block px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
-      Login
-    </router-link>
+    <div class="flex gap-2">
+        <router-link :to="'/login?class=users'" class="hidden md:block px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
+        Login
+        </router-link>
+        <router-link :to="'/login?class=professional'" class="hidden md:block px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
+        Techkalista
+        </router-link>
+        <router-link :to="'/login?class=client'" class="hidden md:block px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
+        TechCliyente
+        </router-link>
+    </div>
+
 
     <!-- Mobile Hamburger -->
     <button

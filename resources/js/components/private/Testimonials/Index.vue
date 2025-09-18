@@ -1,8 +1,11 @@
 <template>
-   <div class="bg-white p-4 rounded-lg border-t border-primary m-5 shadow-md">
+    <div class="mt-3 mb-5">
+       <h2 class="text-primary font-semibold text-xl">Manage Testimonials</h2>
+   </div>
+   <div class="bg-white p-4 rounded-lg border-t border-primary my-5 shadow-md">
         <Table :url="'/api/users'" :headers="tableHeaders" :key="tableKey">
             <template #customButtons>
-                <Dropdown :buttons="buttons"></Dropdown>
+                <!-- <Dropdown :buttons="buttons"></Dropdown> -->
             </template>
             <template v-slot:full_name="slotProps" >
                 <div class="flex justify-start items-center">
@@ -68,9 +71,9 @@
                             <div class="w-full mr-1">
                                 <Select v-model="form.role" id="role-select" label="Roles" placeholder="Select Role" :options="roles" :hasLabel="false" :error="form.errors.has('role')" :errorMsg="form.errors.get('role')"></Select>
                             </div>
-                            <!-- <div class="w-full ml-1">
+                            <div class="w-full ml-1">
                                 <FloatingInput v-model="form.registered_using" label="Register Using" :disabled="true"></FloatingInput>
-                            </div> -->
+                            </div>
                         </div>
 
                     </div>
@@ -172,23 +175,21 @@ const avatar = ref('/images/profile-image.png')
 
 const tableHeaders = reactive([
    { title: 'NAME', onSet: true, sortable: true, query: 'full_name', date_filtered: false, searchable: true, checked: true, hasInlineEdit: true, textAlign: 'left', columnWidth: 'w-64' },
-   { title: 'EMAIL', onSet: true, sortable: false, query: 'email', date_filtered: false, searchable: true, checked: true, hasInlineEdit: false, textAlign: 'left', columnWidth: 'w-64' },
-   { title: 'PHONE #', onSet: false, sortable: false, query: 'phone', date_filtered: false, searchable: true, checked: false, hasInlineEdit: false, textAlign: 'left' },
-   { title: 'ROLE', onSet: true, sortable: true, query: 'role', date_filtered: false, searchable: true, checked: false, hasInlineEdit: false, textAlign: 'left' },
-   { title: 'ONLINE', onSet: true, sortable: true, query: 'online', date_filtered: true, searchable: false, checked: false, hasInlineEdit: true, textAlign: 'left' },
-   { title: 'REGISTERED USING', onSet: true, sortable: true, query: 'registered_using', date_filtered: false, searchable: true, checked: false, hasInlineEdit: false, textAlign: 'left' },
-   { title: 'REGISTERED DATE', onSet: true, sortable: true, query: 'created_at', date_filtered: false, searchable: true, checked: false, hasInlineEdit: false, textAlign: 'left' },
-   { title: 'STATUS', onSet: true, sortable: false, query: 'status', date_filtered: true, searchable: false, checked: false, hasInlineEdit: true, textAlign: 'center' },
+   { title: 'POSITION', onSet: true, sortable: false, query: 'email', date_filtered: false, searchable: true, checked: true, hasInlineEdit: false, textAlign: 'left', columnWidth: 'w-64' },
+   { title: 'TITLE', onSet: false, sortable: false, query: 'phone', date_filtered: false, searchable: true, checked: false, hasInlineEdit: false, textAlign: 'left' },
+   { title: 'MESSAGE', onSet: true, sortable: true, query: 'role', date_filtered: false, searchable: true, checked: false, hasInlineEdit: false, textAlign: 'left' },
+   { title: 'RATING', onSet: true, sortable: true, query: 'online', date_filtered: true, searchable: false, checked: false, hasInlineEdit: true, textAlign: 'left' },
+   { title: 'DATE POSTED', onSet: true, sortable: true, query: 'registered_using', date_filtered: false, searchable: true, checked: false, hasInlineEdit: false, textAlign: 'left' },
    { title: 'ACTIONS', onSet: true, sortable: false, query: 'actions', date_filtered: false, searchable: false, checked: false, hasInlineEdit: true, textAlign: 'center' },
 ]);
 
 const router = useRouter();
 const buttons = reactive([
    { label: 'Add New', key: 'button', function: openDrawer },
-//    { label: 'Export', key: 'button', function: exportData},
-//    { label: 'Import', key: 'button', function: openImportModal },
-//    { label: 'Import Master List', key: 'button', function: openImportMasterModal },
-//    { label: 'Email Blasting', key: 'button', function: openBlastingModal },
+   { label: 'Export', key: 'button', function: exportData},
+   { label: 'Import', key: 'button', function: openImportModal },
+   { label: 'Import Master List', key: 'button', function: openImportMasterModal },
+   { label: 'Email Blasting', key: 'button', function: openBlastingModal },
 ]);
 
 const tableKey = ref(0)

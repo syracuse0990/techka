@@ -89,8 +89,9 @@ export default{
                 { name: 'Dashboard', key:'dashboard', href: '/app/dashboard', icon: HomeIcon, current: this.$route.fullPath == 'dashboard' },
                 { name: 'Roles and Permissions', key:'roles-and-permissions', href: '/app/roles-and-permissions', icon: UserGroupIcon, current: this.$route.fullPath == '/app/roles-and-permissions' },
                 { name: 'Users', key:'manage-users', href: '/app/manage-users', icon: UserGroupIcon, current: this.$route.fullPath == '/app/manage-users' },
-                { name: 'Job Posts', key:'manage-posts', href: '/app/manage-posts', icon: DocumentTextIcon, current: this.$route.fullPath == '/app/manage-posts' },
+                { name: 'Job Posts', key:'manage-jobs', href: '/app/manage-jobs', icon: DocumentTextIcon, current: this.$route.fullPath == '/app/manage-jobs' },
                 { name: 'Trainings', key:'manage-trainings', href: '/app/manage-trainings', icon: IdentificationIcon, current: this.$route.fullPath == '/app/manage-trainings' },
+                { name: 'Testimonials', key:'manage-testimonials', href: '/app/manage-testimonials', icon: ChatBubbleBottomCenterTextIcon, current: this.$route.fullPath == '/app/manage-testimonials' },
                 // { name: 'Survey', key:'manage-survey', href: '/app/manage-employees', icon: IdentificationIcon, current: false },
                 // {
                 //     name: 'Site Settings',

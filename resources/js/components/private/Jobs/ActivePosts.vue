@@ -68,9 +68,9 @@
                             <div class="w-full mr-1">
                                 <Select v-model="form.role" id="role-select" label="Roles" placeholder="Select Role" :options="roles" :hasLabel="false" :error="form.errors.has('role')" :errorMsg="form.errors.get('role')"></Select>
                             </div>
-                            <!-- <div class="w-full ml-1">
+                            <div class="w-full ml-1">
                                 <FloatingInput v-model="form.registered_using" label="Register Using" :disabled="true"></FloatingInput>
-                            </div> -->
+                            </div>
                         </div>
 
                     </div>
@@ -184,7 +184,7 @@ const tableHeaders = reactive([
 
 const router = useRouter();
 const buttons = reactive([
-   { label: 'Add New', key: 'button', function: openDrawer },
+   { label: '', key: 'button', function: openDrawer },
 //    { label: 'Export', key: 'button', function: exportData},
 //    { label: 'Import', key: 'button', function: openImportModal },
 //    { label: 'Import Master List', key: 'button', function: openImportMasterModal },

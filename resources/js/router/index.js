@@ -12,6 +12,11 @@ const Homepage = () => import("@/components/public/Homepage.vue");
 
 const Dashboard = () => import("@/components/private/Dashboard/index.vue");
 const Users = () => import("@/components/private/Users/Index.vue");
+const Trainings = () => import("@/components/private/Trainings/Index.vue");
+const Testimonials = () => import("@/components/private/Testimonials/Index.vue");
+const Jobs = () => import("@/components/private/Jobs/Index.vue");
+
+
 
 const RolesAndPermissions = () => import("@/components/private/RolesPermissions/Index.vue");
 
@@ -80,6 +85,33 @@ const routes = [
                 meta: {
                     title: `TechKa | Users`,
                     ability: "manage-users",
+                },
+            },
+            {
+                name: "trainings",
+                path: "/app/manage-trainings",
+                component: Trainings,
+                meta: {
+                    title: `TechKa | Trainings`,
+                    ability: "manage-trainings",
+                },
+            },
+            {
+                name: "testimonials",
+                path: "/app/manage-testimonials",
+                component: Testimonials,
+                meta: {
+                    title: `TechKa | Testimonials`,
+                    ability: "manage-testimonials",
+                },
+            },
+            {
+                name: "jobs",
+                path: "/app/manage-jobs",
+                component: Jobs,
+                meta: {
+                    title: `TechKa | Jobs`,
+                    ability: "manage-jobs",
                 },
             },
             // {

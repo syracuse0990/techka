@@ -27,7 +27,7 @@
         </Table>
     </div>
    <Teleport to="body">
-        <Drawer :id="'user-form'" :title="(editMode ? 'Update' : 'Add') +' User'" :isShowing="showDrawer" customClass="w-[650px]">
+        <Drawer :id="'user-form'" :title="(editMode ? 'Update' : 'Add') +' Training'" :isShowing="showDrawer" customClass="w-[1000px]">
             <template #content>
                 <form @submit.prevent="editMode ? updateForm() : formSubmit()">
                     <div class="p-3  rounded-md mb-2">
@@ -35,42 +35,41 @@
 
                             <ToogleInput v-model="form.status" label="Status" :labelPosition="'left'"></ToogleInput>
                         </div>
-                        <div class="flex items-center justify-center">
-                            <div class="flex-initial w-[200px]" for="file-upload">
+                        <div class="flex items-end justify-center">
+                            <div class="flex-initial w-[500px]" for="file-upload">
+                                <p class="text-gray-600 text-sm mb-2">Image Banner</p>
                                 <label for="file-upload" class=" cursor-pointer">
-                                    <img class="block mx-auto w-32 h-32 rounded-full border-2 border-stroke-gray" :src="form.avatar || avatar" alt="">
+                                    <img class="block w-[470px] h-60 rounded-lg border-2 border-stroke-gray" :src="form.avatar || avatar" alt="">
                                 </label>
                                 <input id="file-upload" name="file-upload" type="file" class="sr-only" @change="handleFileChange($event)" accept=".jpeg,.jpg,.png" />
                             </div>
 
                             <div class="flex-1">
                                 <div class="w-full mb-2">
-                                    <FloatingInput v-model="form.first_name" label="First Name" id="first-name" placeholder="" :error="form.errors.has('first_name')" :errorMsg="form.errors.get('first_name')"></FloatingInput>
+                                    <FloatingInput v-model="form.title" label="Title" id="title" placeholder="" :error="form.errors.has('title')" :errorMsg="form.errors.get('title')"></FloatingInput>
+                                </div>
+                                 <div class="w-full mb-2">
+                                    <FloatingInput v-model="form.category" label="Category" id="category" placeholder=""></FloatingInput>
                                 </div>
                                 <div class="w-full mb-2">
-                                    <FloatingInput v-model="form.last_name" label="Last Name" id="last-name" placeholder="" :error="form.errors.has('last_name')" :errorMsg="form.errors.get('last_name')"></FloatingInput>
+                                    <FloatingInput type="select" v-model="form.type" :options="trainingTypes" label="Type" id="type" placeholder=""></FloatingInput>
                                 </div>
                                 <div class="w-full mb-2">
-                                    <FloatingInput v-model="form.middle_name" label="Middle Name/Middle Initial" id="middle-name" placeholder=""></FloatingInput>
+                                    <FloatingInput v-model="form.link" label="Video Link" id="link" placeholder=""></FloatingInput>
+                                </div>
+                                <div class="w-full mb-2">
+                                    <FloatingInput v-model="form.duration" label="Video Duration" id="duration" placeholder=""></FloatingInput>
                                 </div>
                             </div>
                         </div>
-                        <Legend label="Contact Details" :labelCss="'text-xs pr-4 font-medium text-aside'"></Legend>
-                        <div class="flex items-start justify-center mb-4">
-                            <div class="w-full mr-1">
-                                <FloatingInput v-model="form.mobile" label="Mobile Number" id="mobile-number" placeholder=""></FloatingInput>
-                            </div>
-                            <div class="w-full ml-1">
-                                <FloatingInput v-model="form.email" label="Email Address" id="email" placeholder="" :error="form.errors.has('email')" :errorMsg="form.errors.get('email')"></FloatingInput>
-                            </div>
+                        <Legend label="Text Contents" :labelCss="'text-xs pr-4 font-medium text-aside'"></Legend>
+                        <div class="w-full mb-2">
+                            <FloatingInput type="textarea" v-model="form.short_description" label="Short Description" id="short_description" placeholder="" :error="form.errors.has('short_description')" :errorMsg="form.errors.get('short_description')"></FloatingInput>
                         </div>
-                        <div class="flex items-start justify-center mb-4">
-                            <div class="w-full mr-1">
-                                <Select v-model="form.role" id="role-select" label="Roles" placeholder="Select Role" :options="roles" :hasLabel="false" :error="form.errors.has('role')" :errorMsg="form.errors.get('role')"></Select>
-                            </div>
-                            <!-- <div class="w-full ml-1">
-                                <FloatingInput v-model="form.registered_using" label="Register Using" :disabled="true"></FloatingInput>
-                            </div> -->
+                        <div class="w-full mt-5">
+                            <label for="text_content" class="block mb-1 text-sm text-gray-600">Long Description</label>
+                            <QuillEditor theme="snow" v-model:content="form.long_description" content-type="html" toolbar="full" class="custom-quill-editor" />
+
                         </div>
 
                     </div>
@@ -86,63 +85,8 @@
                 </form>
             </template>
         </Drawer>
-        <Drawer :id="'import-form'" :title="'Import Users'" :isShowing="showImportDrawer" customClass="">
-            <template #content>
-                <form @submit.prevent="importSubmit()">
-                    <div class="">
 
-                        <input ref="fileInput" @change="selectFile" class="block w-full py-2 mt-3 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file">
-                    </div>
 
-                    <hr class="my-5">
-                    <div class="flex justify-between items-center">
-                        <div class="w-32 ">
-                            <SolidButton @click="openImportDrawer" :type="'button'" label="Close" :icon="XMarkIcon" :customClass="'text-white bg-gray-500 border-gray-600 hover:bg-gray-400'" ></SolidButton>
-                        </div>
-                        <div class="w-32 ">
-                            <SolidButton :isLoading="isImporting" :type="'submit'" :label="'Submit'" :icon="Square3Stack3DIcon" :customClass="'text-white bg-primary border-primary hover:bg-green-600'" ></SolidButton>
-                        </div>
-                    </div>
-                </form>
-            </template>
-        </Drawer>
-        <Drawer :id="'blasting-form'" :title="'Credentials Email Blasting'" :isShowing="showBlastingDrawer" customClass="">
-            <template #content>
-                <form @submit.prevent="startBlasting()">
-                     <div class="w-full my-5">
-                        <Select @change="getUsersByRoles($event)" id="role-select" label="Roles" placeholder="Select Role" :options="roles" :hasLabel="true" :error="form.errors.has('role')" :errorMsg="form.errors.get('role')"></Select>
-                    </div>
-                    <hr class="my-5">
-                    <div class="flex justify-between items-center">
-                        <div class="w-32 ">
-                            <SolidButton @click="openBlastingModal" :type="'button'" label="Close" :icon="XMarkIcon" :customClass="'text-white bg-gray-500 border-gray-600 hover:bg-gray-400'" ></SolidButton>
-                        </div>
-                        <div class="w-32 ">
-                            <SolidButton :isLoading="isBlasting" :type="'submit'" :label="'Blast'" :icon="Square3Stack3DIcon" :customClass="'text-white bg-primary border-primary hover:bg-green-600'" ></SolidButton>
-                        </div>
-                    </div>
-                </form>
-            </template>
-        </Drawer>
-        <Drawer :id="'masterlist-form'" :title="'Import Master Listing'" :isShowing="showMasterDrawer" customClass="">
-            <template #content>
-                <form @submit.prevent="importMasterListing()">
-                     <div class="w-full my-5">
-
-                        <input ref="masterListFile" @change="selectMasterListFile" class="block w-full py-2 mt-3 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file">
-                    </div>
-                    <hr class="my-5">
-                    <div class="flex justify-between items-center">
-                        <div class="w-32 ">
-                            <SolidButton @click="openImportMasterModal" :type="'button'" label="Close" :icon="XMarkIcon" :customClass="'text-white bg-gray-500 border-gray-600 hover:bg-gray-400'" ></SolidButton>
-                        </div>
-                        <div class="w-32 ">
-                            <SolidButton :isLoading="isMasterListImporting" :type="'submit'" :label="'Import'" :icon="Square3Stack3DIcon" :customClass="'text-white bg-primary border-primary hover:bg-green-600'" ></SolidButton>
-                        </div>
-                    </div>
-                </form>
-            </template>
-        </Drawer>
     </Teleport>
 </template>
 
@@ -166,6 +110,8 @@ import ToogleInput from '@/components/parts/Forms/Toogle.vue';
 import FloatingInput from '@/components/parts/Forms/FloatingInput.vue';
 import Legend from '@/components/parts/Banner/Legend.vue';
 import axios from "axios";
+import { QuillEditor } from '@vueup/vue-quill'
+import '@vueup/vue-quill/dist/vue-quill.snow.css'
 
 const avatar = ref('/images/profile-image.png')
 
@@ -181,6 +127,10 @@ const tableHeaders = reactive([
    { title: 'STATUS', onSet: true, sortable: false, query: 'status', date_filtered: true, searchable: false, checked: false, hasInlineEdit: true, textAlign: 'center' },
    { title: 'ACTIONS', onSet: true, sortable: false, query: 'actions', date_filtered: false, searchable: false, checked: false, hasInlineEdit: true, textAlign: 'center' },
 ]);
+const trainingTypes = ref([
+    { value: 'video', label: 'Video' },
+    { value: 'module', label: 'Text Module' },
+])
 
 const router = useRouter();
 const buttons = reactive([
@@ -209,15 +159,13 @@ const selectedRole = ref(null)
 
 const form = reactive(new Form({
     id: null,
-    avatar:'',
-    first_name:'',
-    last_name:'',
-    middle_name: '',
-    email:'',
-    mobile:'',
-    role:'',
-    registered_using: 'web',
-    status:true,
+    title:'',
+    category:'',
+    type:'',
+    link: '',
+    duration:'',
+    short_description:'',
+    long_description:'',
 }));
 
 function selectFile(event){
@@ -419,3 +367,9 @@ onMounted( () => {
 
 
 </script>
+<style >
+.custom-quill-editor {
+  line-height: 1.8;
+  height: 200px !important;
+}
+</style>

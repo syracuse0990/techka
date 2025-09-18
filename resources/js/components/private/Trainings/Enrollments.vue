@@ -2,7 +2,7 @@
    <div class="bg-white p-4 rounded-lg border-t border-primary m-5 shadow-md">
         <Table :url="'/api/users'" :headers="tableHeaders" :key="tableKey">
             <template #customButtons>
-                <Dropdown :buttons="buttons"></Dropdown>
+                <!-- <Dropdown :buttons="buttons"></Dropdown> -->
             </template>
             <template v-slot:full_name="slotProps" >
                 <div class="flex justify-start items-center">
@@ -68,9 +68,9 @@
                             <div class="w-full mr-1">
                                 <Select v-model="form.role" id="role-select" label="Roles" placeholder="Select Role" :options="roles" :hasLabel="false" :error="form.errors.has('role')" :errorMsg="form.errors.get('role')"></Select>
                             </div>
-                            <!-- <div class="w-full ml-1">
+                            <div class="w-full ml-1">
                                 <FloatingInput v-model="form.registered_using" label="Register Using" :disabled="true"></FloatingInput>
-                            </div> -->
+                            </div>
                         </div>
 
                     </div>

@@ -6,7 +6,7 @@
                   {{ isMaintenance ? option.meta_name :option.label }}
               </option>
         </select>
-        <textarea v-else-if="type == 'textarea'":id="id" :value="modelValue" :disabled="disabled" @input="$emit('update:modelValue', $event.target.value)" :placeholder="placeholder" rows="3"
+        <textarea v-else-if="type == 'textarea'":id="id" :value="modelValue" :disabled="disabled" @input="$emit('update:modelValue', $event.target.value)" :placeholder="placeholder" :rows="rows"
         :required="required" :class="[inputClass, error ? 'border-red-600' : 'border-gray-300' ]" class="block px-2.5 pb-1.5 pt-3 w-full text-xs text-gray-900 bg-transparent rounded-lg border-1  appearance-none dark:text-white dark:border-gray-600 dark:focus:border-aside focus:outline-none focus:ring-0 focus:border-aside peer"></textarea>
 
         <input v-else  :type="type" :id="id" :value="modelValue" :disabled="disabled" @input="$emit('update:modelValue', $event.target.value)" :placeholder="placeholder"
@@ -72,6 +72,10 @@ const props = defineProps({
   errorMsg:{
     type: String,
     default: '',
+  },
+  rows:{
+    type: String,
+    default: '3'
   }
 });
 
