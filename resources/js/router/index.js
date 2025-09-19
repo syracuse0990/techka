@@ -23,7 +23,7 @@ const RolesAndPermissions = () => import("@/components/private/RolesPermissions/
 // const ProjectProfile = () => import("@/components/private/manage-project/projectprofile.vue");
 // const ProjectProfileManage = () => import("@/components/private/manage-project/manage.vue");
 
-const SettingsMaintenance = () => import("@/components/private/settings/maintenance.vue");
+ const SettingsMaintenance = () => import("@/components/private/Settings/Maintenance.vue");
 
 const routes = [
     {
