@@ -10,7 +10,7 @@ const PrivateLayout = () => import("@/components/layouts/Private.vue");
 const Login = () => import("@/components/public/Login.vue");
 const Homepage = () => import("@/components/public/Homepage.vue");
 
-const Dashboard = () => import("@/components/private/Dashboard/index.vue");
+const Dashboard = () => import("@/components/private/Dashboard/Index.vue");
 const Users = () => import("@/components/private/Users/Index.vue");
 const Trainings = () => import("@/components/private/Trainings/Index.vue");
 const Testimonials = () => import("@/components/private/Testimonials/Index.vue");
