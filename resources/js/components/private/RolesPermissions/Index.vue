@@ -15,7 +15,7 @@
 </template>
 <script setup>
 import { ref, watch, reactive, onMounted, onBeforeUnmount, onActivated, onUpdated, onDeactivated, onBeforeUpdate, nextTick } from 'vue';
-import TabsComponent from '@/components/parts/Tab/Tab.vue';
+import TabsComponent from '@/components/parts/Tab/tab.vue';
 import MaintenanceComponent from '@/components/private/RolesPermissions/maintenance.vue';
 import RolesComponent from '@/components/private/RolesPermissions/roles.vue';
 
