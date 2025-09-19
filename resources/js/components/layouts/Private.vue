@@ -13,7 +13,8 @@
 <script setup>
 import { ref, watch, reactive, onMounted, onBeforeUnmount, onActivated, onUpdated, onDeactivated, onBeforeUpdate } from 'vue';
 import Aside from '@/components/layouts/parts/Aside.vue';
-import TopBar from '@/components/layouts/parts/TopBar.vue';
+import TopBar from '@/components/layouts/parts/Topbar.vue';
+
 import { initFlowbite } from 'flowbite'
 
     onMounted(() => {
