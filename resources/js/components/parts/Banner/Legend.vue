@@ -1,7 +1,7 @@
 <template>
   <div class="flex items-center my-4">
     <div v-if="centered" class="flex-grow border-t border-slate-300"></div>
-      <span :class="[labelCss, centered ? 'pl-4': '']" class="dark:text-white">{{ label }}</span>
+      <span :class="[labelCss, centered ? 'pl-4': '']" class="dark:text-white text-primary">{{ label }}</span>
     <div class="flex-grow border-t border-slate-300"></div>
 
     <button v-if="showButton"

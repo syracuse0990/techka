@@ -23,6 +23,9 @@ export const userAuthStore = defineStore('userAuth', {
         redirect(){
             router.push({name:'dashboard'});
         },
+        checkPermission(name){
+            return this.permissions.includes(name);
+        },
         async signOut(){
             this.authenticated = false
             this.user = {}

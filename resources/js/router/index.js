@@ -20,7 +20,7 @@ const Jobs = () => import("@/components/private/Jobs/Index.vue");
 
 const RolesAndPermissions = () => import("@/components/private/RolesPermissions/Index.vue");
 
-// const ProjectProfile = () => import("@/components/private/manage-project/projectprofile.vue");
+const Profile = () => import("@/components/private/Profile/Professional.vue");
 // const ProjectProfileManage = () => import("@/components/private/manage-project/manage.vue");
 
  const SettingsMaintenance = () => import("@/components/private/Settings/Maintenance.vue");
@@ -114,15 +114,15 @@ const routes = [
                     ability: "manage-jobs",
                 },
             },
-            // {
-            //     name: "project-profile",
-            //     path: "/app/project-profile",
-            //     component: ProjectProfile,
-            //     meta: {
-            //         title: `Project Profile`,
-            //         ability: "project-profile",
-            //     },
-            // },
+            {
+                name: "profile",
+                path: "/app/profile",
+                component: Profile,
+                meta: {
+                    title: `Profile`,
+                    ability: "profile",
+                },
+            },
             // {
             //     name: "manage-project-profile",
             //     path: "/app/project-profile/manage",

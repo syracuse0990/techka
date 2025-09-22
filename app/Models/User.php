@@ -52,4 +52,22 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Maintenance::class, 'role_id');
     }
+
+    public function permissions(){
+       return $this->belongsTo(Permissions::class, 'role_id', 'maintenance_role_id');
+    }
+
+    public function address(){
+       return $this->hasOne(UserAddress::class, 'user_id');
+    }
+
+    public function educations(){
+       return $this->hasMany(UserEducation::class, 'user_id');
+    }
+
+    public function languages(){
+       return $this->hasMany(UserLanguages::class, 'user_id');
+    }
+
+
 }

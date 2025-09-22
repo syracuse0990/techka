@@ -28,10 +28,25 @@
         </div>
 
         <form
-          @submit.prevent="handleLogin"
+          @submit.prevent="submitForm"
           @keydown="form.onKeydown($event)"
           class="space-y-4"
         >
+            <div v-if="!isRegister" data-aos="fade-in" data-aos-duration="1000">
+                <label for="name" class="block text-sm font-medium text-gray-700" >Name</label
+                >
+                <div class="mt-1 flex gap-2">
+                    <div class="flex-1">
+                        <input v-model="form.first_name" id="first_name" name="first_name" placeholder="First Name" type="text" class="w-full rounded border px-3 py-2 text-gray-700 text-sm focus:border-indigo-400 focus:outline-none" :class="[form.errors.has('first_name') ? 'border-red-500' : 'border-gray-300']" />
+                        <span class="text-red-500 text-xs mt-1 block"  v-if="form.errors.has('first_name')" >{{ form.errors.get('first_name') }}</span >
+                    </div>
+                    <div class="flex-1">
+                        <input v-model="form.last_name" id="last_name" name="last_name" placeholder="Last Name" type="text" class="w-full rounded border px-3 py-2 text-gray-700 text-sm focus:border-indigo-400 focus:outline-none" :class="[form.errors.has('last_name') ? 'border-red-500' : 'border-gray-300']" />
+                        <span class="text-red-500 text-xs mt-1 block" v-if="form.errors.has('last_name')" >{{ form.errors.get('last_name') }}</span >
+                    </div>
+
+                </div>
+          </div>
           <div>
             <label for="email" class="block text-sm font-medium text-gray-700" >Email Address</label
             >
@@ -60,7 +75,7 @@
 
 
           <div class="mb-5">
-            <SolidButton :isLoading="form.busy" :label="isRegister ? 'Login' : ' Register'" :icon="isRegister ? LockClosedIcon: UserPlusIcon" class="w-full" />
+            <SolidButton :type="'submit'" :isLoading="form.busy" :label="isRegister ? 'Login' : ' Register'" :icon="isRegister ? LockClosedIcon: UserPlusIcon" class="w-full" />
           </div>
 
         </form>
@@ -77,7 +92,7 @@
           </div>
         </div>
          <div class="flex items-center justify-end pt-5">
-            <a href="#" @click="isRegister = !isRegister" class="text-sm text-primary hover:underline" > {{ isRegister ? "Don't have an account? Register here." : "Already have an account? Login here." }} </a >
+            <a href="#" @click.prevent="isRegister = !isRegister" class="text-sm text-primary hover:underline" > {{ isRegister ? "Don't have an account? Register here." : "Already have an account? Login here." }} </a >
           </div>
       </div>
     </div>
@@ -88,6 +103,7 @@
   <script setup>
   import { reactive, ref, onMounted } from 'vue';
   import Form from 'vform'
+  import { useRoute } from 'vue-router';
   import {siteSettings} from '@/store/utils';
   import {userAuthStore} from '@/store/auth';
   import { successMessage, errorMessage } from "@/utilities/toast.js";
@@ -96,10 +112,14 @@
 
   const logo = ref('/images/techka.png')
   const sidebanner = ref('/images/intro.webp')
+  const route = useRoute();
 
     const form = reactive(new Form({
+        first_name: '',
+        last_name: '',
         email: '',
         password: '',
+        class:'',
     }));
 
     const processing = ref(false)
@@ -117,36 +137,52 @@
         url.value = "";
     }
 
-    function handleLogin(){
-      axios.get('/sanctum/csrf-cookie').then(response => {
-        form.post("/api/login").then((data) => {
+    function submitForm(){
+    if (isRegister.value) {
+        axios.get('/sanctum/csrf-cookie').then(response => {
+            form.post("/api/login").then((data) => {
 
-            if(data.data.success){
-              userAuthStore().authenticated = true
-              userAuthStore().user = data.data.data
-              userAuthStore().redirect();
-            }else{
-                errorMessage("Oops!", data.data.message, "top-right");
-            }
-          })
-          .catch(({ response }) => {
-            errorMessage("Oops!", "These credentials do not match our records.", "top-right");
-          })
-          .finally(() => {
-          });
-      });
+                if(data.data.success){
+                userAuthStore().authenticated = true
+                userAuthStore().user = data.data.data
+                userAuthStore().permissions = data.data.data.permissions
+                userAuthStore().redirect();
+                }else{
+                    errorMessage("Oops!", data.data.message, "top-right");
+                }
+            })
+            .catch(({ response }) => {
+                errorMessage("Oops!", "These credentials do not match our records.", "top-right");
+            })
+            .finally(() => {
+            });
+        });
+    }else{
+         form.post("/api/register").then((data) => {
+
+                if(data.data.success){
+                    userAuthStore().authenticated = true
+                    userAuthStore().user = data.data.data
+                    userAuthStore().redirect();
+                }else{
+                    errorMessage("Oops!", data.data.message, "top-right");
+                }
+            })
+            .catch(({ response }) => {
+                errorMessage("Oops!", "These credentials do not match our records.", "top-right");
+            })
+            .finally(() => {
+            });
+    }
 
     }
 
-    // onMounted(()=>{
-    //     axios.get('http://127.0.0.1:8000/api/v1/user/fields', {
-    //     headers: {
-    //         'Authorization': 'Bearer 2162|gRWLwXfQs5JsqyQprgfgEfKt5MT9fbXtlludFIM1'
-    //     }
-    // }).then((response) => {
-    //         console.log(response)
-    //     });
-    // })
+
+    onMounted(()=>{
+       const classType = route.query.class;
+       form.class = classType
+
+    })
   </script>
 
 

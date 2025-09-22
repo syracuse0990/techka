@@ -6,7 +6,7 @@
         <template #misc>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-10 p-5">
                 <CategoryPanel v-if="mountCategory"></CategoryPanel>
-                <!-- <CategoryPanel v-if="mountCategory"></CategoryPanel> -->
+                <SkillsPanel v-if="mountSkills"></SkillsPanel>
             </div>
         </template>
         <template #certificate>
@@ -22,6 +22,7 @@ import { onMounted, reactive, ref, watch, computed, provide, inject, onUpdated, 
 import { UserIcon, BuildingOffice2Icon, UsersIcon, BuildingOfficeIcon, ListBulletIcon, Cog8ToothIcon, ClipboardDocumentIcon, NewspaperIcon } from '@heroicons/vue/24/outline'
 import TabsComponent from '@/components/parts/Tab/TabIcon.vue';
 import CategoryPanel from '@/components/private/Settings/parts/Category.vue';
+import SkillsPanel from '@/components/private/Settings/parts/Skills.vue';
 import CertificatePanel from '@/components/private/Settings/parts/Certificates.vue';
 
 const tabData = ref([
@@ -29,6 +30,7 @@ const tabData = ref([
      { name: 'certificate', label: 'Certificates', icon: ClipboardDocumentIcon, disabled: false, show: true },
 ])
 const mountCategory = ref(false)
+const mountSkills = ref(false)
 const mountCertificate = ref(false)
 
 
@@ -37,11 +39,14 @@ function switchTab(index) {
     // Reset all panels
     mountCategory.value = false;
     mountCertificate.value = false;
+    mountSkills.value = false
+
 
 
     // Enable relevant panels
     if (index === 0) {
         mountCategory.value = true
+        mountSkills.value = true
     }
     else if (index === 1) {
         mountCertificate.value = true;
@@ -57,6 +62,7 @@ function switchTab(index) {
 
 onMounted(() => {
       mountCategory.value = true
+      mountSkills.value = true
 })
 
 </script>

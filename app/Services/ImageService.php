@@ -7,15 +7,14 @@ use Illuminate\Support\Str;
 
 class ImageService
 {
-    public function processLogo($base64Image)
+    public function processLogo($base64Image, $name)
     {
         if (preg_match('/^data:image\/(\w+);base64,/', $base64Image, $match)) {
 
             $base64File = substr($base64Image, strpos($base64Image, ',') + 1);
             $imageData = base64_decode($base64File);
             $extension = $match[1];
-            $uniqueId = time() . '-' . Str::uuid();
-            $logoName = $uniqueId . '-company_logo.' . $extension;
+            $logoName = time() .'-'.$name.'-logo.' . $extension;
 
 
             $image = Image::read($imageData);

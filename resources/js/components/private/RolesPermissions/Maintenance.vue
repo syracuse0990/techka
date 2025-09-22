@@ -94,7 +94,7 @@
                      </div>
                  </div>
                  <div class="absolute bottom-0 right-4">
-                     <SolidButton :type="'button'" :disabled="setDisabled" :label="'Submit'" :isLoading="form.busy" :icon="Square3Stack3DIcon" @click.prevent="saveItem" :customClass="'px-[30px] text-white'"></SolidButton>
+                     <SolidButton :type="'button'" :disabled="setDisabled" :label="'Submit'" :isLoading="form.busy" :icon="Square3Stack3DIcon" @click.prevent="saveItem" :customClass="'px-[30px] text-primary'"></SolidButton>
                  </div>
              </div>
          </div>

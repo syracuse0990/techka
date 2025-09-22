@@ -17,11 +17,11 @@
             <div class= "max hidden text-white mt-20 flex-col space-y-2 w-full h-[calc(100vh)]">
                 <ul role="list" class="space-y-1 px-2">
                     <li v-for="item in navigation" :key="item.key" >
-                        <router-link v-if="!item.children" :to="item.href" :class="[$route.path.includes(item.href) ? 'bg-primary text-darkmode-600 dark:bg-darkmode-500' : 'hover:bg-primary dark:hover:bg-darkmode-500 hover:text-white', 'group text-white hover:text-darkmode-600 hover:cursor-pointer flex gap-x-3 rounded-md p-2 text-sm leading-6 font-normal dark:text-darkmode-555']">
+                        <router-link v-if="!item.children && item.permission" :to="item.href" :class="[$route.path.includes(item.href) ? 'bg-primary text-darkmode-600 dark:bg-darkmode-500' : 'hover:bg-primary dark:hover:bg-darkmode-500 hover:text-white', 'group text-white hover:text-darkmode-600 hover:cursor-pointer flex gap-x-3 rounded-md p-2 text-sm leading-6 font-normal dark:text-darkmode-555']">
                             <component :is="item.icon" class="h-6  hover:text-darkmode-600 w-6 shrink-0 dark:text-darkmode-555" aria-hidden="true" />
                             {{ item.name }}
                         </router-link>
-                        <Disclosure as="div" v-else v-slot="{ open }">
+                        <Disclosure as="div" v-if="item.children && item.permission" v-slot="{ open }">
                             <DisclosureButton @click.prevent="gotoPage()" :class="[item.current ? ' bg-white' : ' hover:bg-primary dark:hover:bg-darkmode-500'] + ' has-child flex items-center hover:text-white w-full text-left text-white font-normal rounded-md hover:cursor-pointer p-2 gap-x-3 text-sm leading-6  dark:text-darkmode-555 ' + item.key ">
                                 <component :is="item.icon" class="h-6 w-6 shrink-0 hover:text-darkmode-600  dark:text-darkmode-555" aria-hidden="true" />
                                 {{ item.name }}
@@ -40,22 +40,25 @@
 
             </div>
             <!-- MINI SIDEBAR-->
-            <div class="mini mt-20 flex flex-col space-y-2 w-full h-[calc(100vh)]">
-                <div v-for="item in navigation" :key="item.key" class="relative">
-                    <div @mouseover.prevent="onHoverIn(item.key)" @mouseout.prevent="onHoverOut" :class="[isHovering === item.key ? 'ml-4' : 'hover:ml-4']" class="relative z-1 justify-end pr-3 text-white z-50 hover:text-purple-500 hover:cursor-pointer dark:hover:text-blue-500 w-full bg-primary dark:bg-darkmode-700 dark:hover:bg-darkmode-700 p-3 rounded-full transform ease-in-out duration-300 flex" >
-                        <component :is="item.icon" class="h-6 w-6 shrink-0 text-white dark:text-darkmode-555" aria-hidden="true" />
+            <div class="mini mt-20 flex flex-col w-full h-[calc(100vh)]">
+                <div v-for="item in navigation" :key="item.key">
+                    <div class="relative my-1" v-if="item.permission" >
+                        <div  @mouseover.prevent="onHoverIn(item.key)" @mouseout.prevent="onHoverOut" :class="[isHovering === item.key ? 'ml-4' : 'hover:ml-4']" class="relative z-1 justify-end pr-3 text-white z-50 hover:text-purple-500 hover:cursor-pointer dark:hover:text-blue-500 w-full bg-primary dark:bg-darkmode-700 dark:hover:bg-darkmode-700 p-3 rounded-full transform ease-in-out duration-300 flex" >
+                            <component :is="item.icon" class="h-6 w-6 shrink-0 text-white dark:text-darkmode-555" aria-hidden="true" />
+                        </div>
+                        <!-- Animated sliding menu -->
+                        <div v-show="isHovering === item.key" class="absolute inset-0 flex justify-center items-center w-full  z-10 left-0 mt-1  transform translate-x-full dark:bg-darkmode-500 ease-in-out duration-300">
+                            <ul @mouseover.prevent="onHoverIn(item.key)" @mouseout.prevent="onHoverOut" class="py-4 border border-t-1 border-r-1  border-b-1 dark:border-darkmode-700 bg-white dark:bg-darkmode-500 rounded-r-md shadow-lg dark:shadow-none w-60">
+                                <router-link :to="item.href" v-if="!item.children" class="pl-10 py-1 dark:text-darkmode-555 text-darkgray dark:hover:text-blue-500 hover:text-bg-lightblue cursor-pointer">
+                                    {{ item.name }}
+                                </router-link>
+                                <li v-else v-for="menuItem in item.children" :key="menuItem.name" class="pl-8 py-1 text-darkgray dark:text-darkmode-555 dark:hover:text-blue-500 hover:text-bg-lightblue cursor-pointer" >
+                                    <router-link :to="menuItem.href">&#8226; {{ menuItem.name }}</router-link>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                    <!-- Animated sliding menu -->
-                    <div v-show="isHovering === item.key" class="absolute inset-0 flex justify-center items-center w-full  z-10 left-0 mt-1  transform translate-x-full dark:bg-darkmode-500 ease-in-out duration-300">
-                        <ul @mouseover.prevent="onHoverIn(item.key)" @mouseout.prevent="onHoverOut" class="py-4 border border-t-1 border-r-1  border-b-1 dark:border-darkmode-700 bg-white dark:bg-darkmode-500 rounded-r-md shadow-lg dark:shadow-none w-60">
-                            <router-link :to="item.href" v-if="!item.children" class="pl-10 py-1 dark:text-darkmode-555 text-darkgray dark:hover:text-blue-500 hover:text-bg-lightblue cursor-pointer">
-                                {{ item.name }}
-                            </router-link>
-                            <li v-else v-for="menuItem in item.children" :key="menuItem.name" class="pl-8 py-1 text-darkgray dark:text-darkmode-555 dark:hover:text-blue-500 hover:text-bg-lightblue cursor-pointer" >
-                                <router-link :to="menuItem.href">&#8226; {{ menuItem.name }}</router-link>
-                            </li>
-                        </ul>
-                    </div>
+
                 </div>
             </div>
         </aside>
@@ -67,9 +70,10 @@
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
 import { MenuButton,Menu,MenuItem,MenuItems,TransitionChild,TransitionRoot,} from '@headlessui/vue';
 import { ChevronRightIcon } from '@heroicons/vue/20/solid';
-import { HomeIcon, UsersIcon, UserGroupIcon, Cog6ToothIcon, IdentificationIcon, QueueListIcon, BuildingOfficeIcon, DocumentTextIcon, ChatBubbleBottomCenterTextIcon,  } from '@heroicons/vue/24/outline'
+import { HomeIcon, UsersIcon, UserGroupIcon, Cog6ToothIcon, IdentificationIcon, QueueListIcon,UserIcon, BuildingOfficeIcon, DocumentTextIcon, ChatBubbleBottomCenterTextIcon, NewspaperIcon  } from '@heroicons/vue/24/outline'
 import { siteSettings } from '@/store/utils';
 import { userAuthStore } from '@/store/auth';
+
 
 export default{
     name:'Aside',
@@ -86,12 +90,12 @@ export default{
             // permissions: userAuthStore().getPermissions,
             isMenuName:'',
             navigation:[
-                { name: 'Dashboard', key:'dashboard', href: '/app/dashboard', icon: HomeIcon, current: this.$route.fullPath == 'dashboard' },
-                { name: 'Roles and Permissions', key:'roles-and-permissions', href: '/app/roles-and-permissions', icon: UserGroupIcon, current: this.$route.fullPath == '/app/roles-and-permissions' },
-                { name: 'Users', key:'manage-users', href: '/app/manage-users', icon: UserGroupIcon, current: this.$route.fullPath == '/app/manage-users' },
-                { name: 'Job Posts', key:'manage-jobs', href: '/app/manage-jobs', icon: DocumentTextIcon, current: this.$route.fullPath == '/app/manage-jobs' },
-                { name: 'Trainings', key:'manage-trainings', href: '/app/manage-trainings', icon: IdentificationIcon, current: this.$route.fullPath == '/app/manage-trainings' },
-                { name: 'Testimonials', key:'manage-testimonials', href: '/app/manage-testimonials', icon: ChatBubbleBottomCenterTextIcon, current: this.$route.fullPath == '/app/manage-testimonials' },
+                { name: 'Dashboard', key:'dashboard', href: '/app/dashboard', icon: HomeIcon, current: this.$route.fullPath == 'dashboard', permission: userAuthStore().checkPermission('dashboard-view') },
+                { name: 'Roles and Permissions', key:'roles-and-permissions', href: '/app/roles-and-permissions', icon: UserGroupIcon, current: this.$route.fullPath == '/app/roles-and-permissions', permission: userAuthStore().checkPermission('roles-&-permission-view') },
+                { name: 'Users', key:'manage-users', href: '/app/manage-users', icon: UserGroupIcon, current: this.$route.fullPath == '/app/manage-users', permission: userAuthStore().checkPermission('users-view') },
+                { name: 'Job Posts', key:'manage-jobs', href: '/app/manage-jobs', icon: DocumentTextIcon, current: this.$route.fullPath == '/app/manage-jobs', permission: userAuthStore().checkPermission('job-posts-view') },
+                { name: 'Trainings', key:'manage-trainings', href: '/app/manage-trainings', icon: IdentificationIcon, current: this.$route.fullPath == '/app/manage-trainings', permission: userAuthStore().checkPermission('trainings-view') },
+                { name: 'Testimonials', key:'manage-testimonials', href: '/app/manage-testimonials', icon: ChatBubbleBottomCenterTextIcon, current: this.$route.fullPath == '/app/manage-testimonials', permission: userAuthStore().checkPermission('testimonials-view') },
                 // { name: 'Survey', key:'manage-survey', href: '/app/manage-employees', icon: IdentificationIcon, current: false },
                 // {
                 //     name: 'Site Settings',
@@ -104,7 +108,9 @@ export default{
 
                 //     ],
                 // },
-                { name: 'Maintenance', key:'maintenance', href: '/app/settings/maintenance', icon: Cog6ToothIcon, current: false },
+                { name: 'Maintenance', key:'maintenance', href: '/app/settings/maintenance', icon: Cog6ToothIcon, current: false, permission: userAuthStore().checkPermission('maintenance-view')  },
+                { name: 'My Profile', key:'profile', href: '/app/profile', icon: UserIcon, current: false, permission: userAuthStore().checkPermission('professional-profile-view')  },
+                { name: 'Job Posts', key:'job-posts', href: '/app/job-posts', icon: NewspaperIcon, current: false, permission: userAuthStore().checkPermission('professional-job-post-view')  },
                 // { name: 'Sales Team', key:'sales', href: '#', icon: ChatBubbleBottomCenterTextIcon, current: false },
                 // { name: 'Components', key:'components', href: '/app/components', icon: CubeTransparentIcon, current: this.$route.fullPath == '/app/components' },
             ],
