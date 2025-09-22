@@ -6,7 +6,7 @@
             </div>
             <div class="flex-1">
                 <h3 class="text-font-darkblue text-2xl font-extrabold text-primary">Good Day,</h3>
-                <h3 class="text-font-darkblue text-2xl font-extrabold text-primary">System Admin!</h3>
+                <h3 class="text-font-darkblue text-2xl font-extrabold text-primary">{{fullName}}!</h3>
             </div>
         </div>
         <div class="flex justify-between items-center my-5">
@@ -63,8 +63,9 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
+import {userAuthStore} from '@/store/auth';
 
 const activeButton = ref(0);
 
@@ -74,10 +75,15 @@ const buttons = [
 //   '',
 ];
 
+const fullName = ref('System Admin')
 const startDate = ref(new Date(new Date().getFullYear(), 0, 1));
 const currentDate = ref(new Date());
 
 function setActiveButton(index) {
   activeButton.value = index;
 }
+onMounted(async () => {
+    fullName.value = userAuthStore().user.user.first_name
+});
+
 </script>

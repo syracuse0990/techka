@@ -108,11 +108,13 @@ export default{
 
                 //     ],
                 // },
-                { name: 'Maintenance', key:'maintenance', href: '/app/settings/maintenance', icon: Cog6ToothIcon, current: false, permission: userAuthStore().checkPermission('maintenance-view')  },
-                { name: 'My Profile', key:'profile', href: '/app/profile', icon: UserIcon, current: false, permission: userAuthStore().checkPermission('professional-profile-view')  },
-                { name: 'Job Posts', key:'job-posts', href: '/app/job-posts', icon: NewspaperIcon, current: false, permission: userAuthStore().checkPermission('professional-job-post-view')  },
-                { name: 'Job Applications', key:'job-posts', href: '/app/job-applications', icon: NewspaperIcon, current: false, permission: userAuthStore().checkPermission('professional-job-post-view')  },
-                // { name: 'Sales Team', key:'sales', href: '#', icon: ChatBubbleBottomCenterTextIcon, current: false },
+                { name: 'Maintenance', key:'maintenance', href: '/app/settings/maintenance', icon: Cog6ToothIcon, current: this.$route.fullPath == '/app/settings/maintenance', permission: userAuthStore().checkPermission('maintenance-view')  },
+                { name: 'My Profile', key:'profile', href: '/app/profile', icon: UserIcon, current: this.$route.fullPath == '/app/profile', permission: userAuthStore().checkPermission('professional-profile-view')  },
+                { name: 'Job Posts', key:'job-posts', href: '/app/job-posts', icon: NewspaperIcon, current: this.$route.fullPath == '/app/job-posts', permission: userAuthStore().checkPermission('professional-job-post-view')  },
+                { name: 'Job Applications', key:'job-applications', href: '/app/job-applications', icon: NewspaperIcon, current: this.$route.fullPath == '/app/job-applications', permission: userAuthStore().checkPermission('professional-job-applications-view')},
+                { name: 'Client Profile', key:'client-profile', href: '/app/client-profile', icon: UserIcon, current: this.$route.fullPath == '/app/client-profile', permission: userAuthStore().checkPermission('client-profile-view')  },
+                { name: 'Job Posts', key:'client-job-posts', href: '/app/client-job-posts', icon: NewspaperIcon, current: this.$route.fullPath == '/app/client-job-posts', permission: userAuthStore().checkPermission('client-job-post-view')  },
+
                 // { name: 'Components', key:'components', href: '/app/components', icon: CubeTransparentIcon, current: this.$route.fullPath == '/app/components' },
             ],
             permittedNavigation: [],

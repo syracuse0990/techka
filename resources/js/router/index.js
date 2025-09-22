@@ -15,12 +15,15 @@ const Users = () => import("@/components/private/Users/Index.vue");
 const Trainings = () => import("@/components/private/Trainings/Index.vue");
 const Testimonials = () => import("@/components/private/Testimonials/Index.vue");
 const Jobs = () => import("@/components/private/Jobs/Index.vue");
+const ProfessionalJobPosts = () => import("@/components/private/JobPosts/ProfessionalJobPosts.vue");
+const ClientJobPosts = () => import("@/components/private/JobPosts/ClientJobPosts.vue");
 
-
+const ProfessionalJobApplications = () => import("@/components/private/JobPosts/ProfessionalJobApplications.vue");
 
 const RolesAndPermissions = () => import("@/components/private/RolesPermissions/Index.vue");
 
 const Profile = () => import("@/components/private/Profile/Professional.vue");
+const ClientProfile = () => import("@/components/private/Profile/Client.vue");
 // const ProjectProfileManage = () => import("@/components/private/manage-project/manage.vue");
 
  const SettingsMaintenance = () => import("@/components/private/Settings/Maintenance.vue");
@@ -123,6 +126,46 @@ const routes = [
                     ability: "profile",
                 },
             },
+            {
+                name: "client-profile",
+                path: "/app/client-profile",
+                component: ClientProfile,
+                meta: {
+                    title: `Profile`,
+                    ability: "client-profile",
+                },
+            },
+
+            {
+                name: "job-posts",
+                path: "/app/job-posts",
+                component: ProfessionalJobPosts,
+                meta: {
+                    title: `Job Posts`,
+                    ability: "job-posts",
+                },
+            },
+            {
+                name: "job-applications",
+                path: "/app/job-applications",
+                component: ProfessionalJobApplications,
+                meta: {
+                    title: `My Job Applications`,
+                    ability: "job-applications",
+                },
+            },
+            {
+                name: "client-job-posts",
+                path: "/app/client-job-posts",
+                component: ClientJobPosts,
+                meta: {
+                    title: `Job Posts`,
+                    ability: "client-job-posts",
+                },
+            },
+
+
+
             // {
             //     name: "manage-project-profile",
             //     path: "/app/project-profile/manage",
