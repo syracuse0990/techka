@@ -91,7 +91,7 @@ export default{
             isMenuName:'',
             navigation:[
                 { name: 'Dashboard', key:'dashboard', href: '/app/dashboard', icon: HomeIcon, current: this.$route.fullPath == 'dashboard', permission: userAuthStore().checkPermission('dashboard-view') },
-                { name: 'Roles and Permissions', key:'roles-and-permissions', href: '/app/roles-and-permissions', icon: UserGroupIcon, current: this.$route.fullPath == '/app/roles-and-permissions', permission: userAuthStore().checkPermission('roles-&-permission-view') },
+                { name: 'Roles and Permissions', key:'roles-and-permissions', href: '/app/roles-and-permissions', icon: UserGroupIcon, current: this.$route.fullPath == '/app/roles-and-permissions', permission: true }, //userAuthStore().checkPermission('roles-&-permission-view')
                 { name: 'Users', key:'manage-users', href: '/app/manage-users', icon: UserGroupIcon, current: this.$route.fullPath == '/app/manage-users', permission: userAuthStore().checkPermission('users-view') },
                 { name: 'Job Posts', key:'manage-jobs', href: '/app/manage-jobs', icon: DocumentTextIcon, current: this.$route.fullPath == '/app/manage-jobs', permission: userAuthStore().checkPermission('job-posts-view') },
                 { name: 'Trainings', key:'manage-trainings', href: '/app/manage-trainings', icon: IdentificationIcon, current: this.$route.fullPath == '/app/manage-trainings', permission: userAuthStore().checkPermission('trainings-view') },
@@ -111,6 +111,7 @@ export default{
                 { name: 'Maintenance', key:'maintenance', href: '/app/settings/maintenance', icon: Cog6ToothIcon, current: false, permission: userAuthStore().checkPermission('maintenance-view')  },
                 { name: 'My Profile', key:'profile', href: '/app/profile', icon: UserIcon, current: false, permission: userAuthStore().checkPermission('professional-profile-view')  },
                 { name: 'Job Posts', key:'job-posts', href: '/app/job-posts', icon: NewspaperIcon, current: false, permission: userAuthStore().checkPermission('professional-job-post-view')  },
+                { name: 'Job Applications', key:'job-posts', href: '/app/job-applications', icon: NewspaperIcon, current: false, permission: userAuthStore().checkPermission('professional-job-post-view')  },
                 // { name: 'Sales Team', key:'sales', href: '#', icon: ChatBubbleBottomCenterTextIcon, current: false },
                 // { name: 'Components', key:'components', href: '/app/components', icon: CubeTransparentIcon, current: this.$route.fullPath == '/app/components' },
             ],
