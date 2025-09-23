@@ -29,8 +29,8 @@ export default {
               555:'#99a3b3',
             },
 
-                aside: '#1E293B',
-                primary: '#1738b0',
+                aside: '#1F4583',
+                primary: '#2a60b8',
                 thirdy: '#FF7B00',
                 secondary: '#00C2FF',
                 mainText: '#0F172A',

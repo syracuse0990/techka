@@ -11,12 +11,14 @@ import moshaToast from "mosha-vue-toastify";
 import "mosha-vue-toastify/dist/style.css";
 import "vue-select/dist/vue-select.css";
 import vSelect from 'vue-select';
+import vueDebounce from 'vue-debounce'
 
 
 const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate);
 
 const app = createApp({});
+app.directive("debounce", vueDebounce({ lock: true }));
 app.use(pinia);
 app.use(Router);
 app.use(moshaToast);
